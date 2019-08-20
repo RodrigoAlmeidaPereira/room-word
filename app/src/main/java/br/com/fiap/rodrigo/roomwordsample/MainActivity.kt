@@ -15,10 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.fiap.rodrigo.roomwordsample.model.Word
 
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var wordViewModel: WordViewModel
+    val wordViewModel: WordViewModel by viewModel()
+    val adapter : WordListAdapter by inject()
+
 
     companion object {
         const val newWordActivityRequestCode = 1
@@ -28,10 +32,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        wordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = WordListAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
 
