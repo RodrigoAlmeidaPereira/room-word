@@ -11,9 +11,9 @@ import br.com.fiap.rodrigo.roomwordsample.repository.WordRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WordViewModel(application: Application, wordDao: WordDao) : AndroidViewModel(application) {
+class WordViewModel(application: Application, private val repository: WordRepository)
+    : AndroidViewModel(application) {
 
-    private val repository: WordRepository = WordRepository(wordDao)
     val allWords: LiveData<List<Word>> = repository.allWords
 
     fun insert(word: Word) = viewModelScope.launch(Dispatchers.IO) {

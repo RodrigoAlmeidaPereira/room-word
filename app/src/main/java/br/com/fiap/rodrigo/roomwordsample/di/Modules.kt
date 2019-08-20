@@ -5,6 +5,7 @@ import br.com.fiap.rodrigo.roomwordsample.WordListAdapter
 import br.com.fiap.rodrigo.roomwordsample.WordViewModel
 import br.com.fiap.rodrigo.roomwordsample.dao.WordDao
 import br.com.fiap.rodrigo.roomwordsample.dao.WordRoomDatabase
+import br.com.fiap.rodrigo.roomwordsample.repository.WordRepository
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -18,6 +19,10 @@ val dbModule = module {
     }
 
     single{ get<WordRoomDatabase>().wordDao()}
+}
+
+val repositoryModule = module {
+    single{ WordRepository(get())}
 }
 
 val uiModule = module {
